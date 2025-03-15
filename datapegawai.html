@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pegawai</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tfoot {
+            font-weight: bold;
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        function hitungGaji() {
+            let nama = "Dodi Prayodi";
+            let umur = 25;
+            let jabatan = document.getElementById("jabatan").value;
+            let status = document.getElementById("status").value;
+            
+            let gajiPokok = jabatan === "Manajer" ? 15000000 : 
+                            jabatan === "Asisten Manajer" ? 10000000 : 
+                            5000000;
+            let tunjanganJabatan = 0.15 * gajiPokok;
+            let bpjs = 0.10 * gajiPokok;
+            let tunjanganKeluarga = status === "Menikah" ? 0.20 * gajiPokok : 0;
+            let totalGaji = gajiPokok + tunjanganJabatan + tunjanganKeluarga - bpjs;
+            
+            document.getElementById("gajiPokok").innerText = gajiPokok.toLocaleString();
+            document.getElementById("tunjanganJabatan").innerText = tunjanganJabatan.toLocaleString();
+            document.getElementById("bpjs").innerText = bpjs.toLocaleString();
+            document.getElementById("tunjanganKeluarga").innerText = tunjanganKeluarga.toLocaleString();
+            document.getElementById("totalGaji").innerText = totalGaji.toLocaleString();
+            document.getElementById("totalGajiKeseluruhan").innerText = totalGaji.toLocaleString();
+        }
+    </script>
+</head>
+<body>
+    <h2>Data Pegawai</h2>
+    <label for="jabatan">Pilih Jabatan: </label>
+    <select id="jabatan" onchange="hitungGaji()">
+        <option value="Manajer">Manajer</option>
+        <option value="Asisten Manajer">Asisten Manajer</option>
+        <option value="Staff">Staff</option>
+    </select>
+    
+    <label for="status">Status Pernikahan: </label>
+    <select id="status" onchange="hitungGaji()">
+        <option value="Menikah">Menikah</option>
+        <option value="Belum Menikah">Belum Menikah</option>
+    </select>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Pegawai</th>
+                <th>Umur</th>
+                <th>Jabatan</th>
+                <th>Status</th>
+                <th>Gaji Pokok</th>
+                <th>Tunjangan Jabatan</th>
+                <th>BPJS</th>
+                <th>Tunjangan Keluarga</th>
+                <th>Total Gaji</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dodi Prayodi</td>
+                <td>25</td>
+                <td id="selectedJabatan">Manajer</td>
+                <td id="selectedStatus">Menikah</td>
+                <td id="gajiPokok">15,000,000</td>
+                <td id="tunjanganJabatan">2,250,000</td>
+                <td id="bpjs">1,500,000</td>
+                <td id="tunjanganKeluarga">3,000,000</td>
+                <td id="totalGaji">18,750,000</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">Total Gaji Keseluruhan</td>
+                <td id="totalGajiKeseluruhan">18,750,000</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
